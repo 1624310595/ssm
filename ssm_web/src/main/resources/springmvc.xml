@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/mvc
+     http://www.springframework.org/schema/mvc/spring-mvc.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启注解扫描controller层-->
+    <context:component-scan base-package="com.hdh.web"></context:component-scan>
+
+    <!--配置视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/code/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--放行静态资源-->
+    <mvc:resources mapping="/code/**" location="/code/"></mvc:resources>
+    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+
+    <!--开启springmvc对注解的支持-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    
+    
+    <!--配置拦截器-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**" />-->
+            <!--<mvc:exclude-mapping path="/user/login"></mvc:exclude-mapping>-->
+            <!--<bean class="com.hdh.web.interceptor.LoginInterecpt"></bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--配置json-->
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 通用 mapper -->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hdh.mapper"/>
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
+    </bean>
+
+
+</beans>

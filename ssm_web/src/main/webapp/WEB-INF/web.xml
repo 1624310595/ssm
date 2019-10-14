@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>ssm_web</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--配置Spring的监听器，默认只加载WEB-INF目录下的applicationContext.xml配置文件 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--设置配置文件的路径 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <!--loginFilter-->
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>com.hdh.web.filter.LoginFilter</filter-class>
+        <init-param>
+            <!--不进行过滤的url，因为它就是跳转到登陆界面, -->
+            <param-name>unFiltetRequest</param-name>
+            <param-value>/emp/empLogin</param-value>
+        </init-param>
+        <init-param>
+            <!--未登录用户跳转的url -->
+            <param-name>unFilterPag</param-name>
+            <param-value>/code/login.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+    <!--前端控制器 -->
+    <servlet>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--初始化时 加载sringmvx.xml -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+        <!--启动服务器时，创建Servlet -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!--放行静态资源-->
+    <servlet-mapping>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 配置 springMVC 编码过滤器 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!-- 设置过滤器中的属性值 -->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <!-- 启动过滤器 -->
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 配置session超时时间，单位分钟最后一次请求开始计时  过时自动销毁session -->
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+</web-app>
