@@ -38,7 +38,7 @@
                     <div class="sidebar-menugroup">
                         <div class="sidebar-grouptitle">人员管理</div>
                         <ul class="sidebar-menu">
-                            <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/department">部门管理</a></li>
+                            <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/departments">部门管理</a></li>
                             <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/department">员工注册</a>
                             </li>
                             <li class="sidebar-menuitem"><a

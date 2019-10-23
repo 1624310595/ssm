@@ -31,11 +31,16 @@ public class EmpController {
     public String empLogin(@RequestParam("username") String username, @RequestParam("password") String Password, HttpSession session, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         Employee emps = empService.empLogin(username, Password);
+        Integer flage = (Integer)session.getAttribute("employeeid");
         if (emps == null) {
             request.setAttribute("error","账户名或密码错误");
             mv.setViewName("login");
             return "login";
         } else {
+            if(session.getAttribute("employeeid")!=null && session.getAttribute("employeeid")== emps.getEmployeeid()){
+                request.setAttribute("error","请不要重复登陆");
+                return "login";
+            }
             session.setAttribute("username", emps.getUsername());
             session.setAttribute("employeeid", emps.getEmployeeid());
             session.setAttribute("role", emps.getRole());
@@ -60,7 +65,7 @@ public class EmpController {
     public String register(Employee employee) {
         ModelAndView mv = new ModelAndView();
         empService.register(employee);
-        return "login";
+        return "redirect:/emp/approveaccount";
     }
 
     /**

@@ -20,50 +20,49 @@
     </div>
 </div>
 <div class="page-body">
-    <div class="page-body">
-        <div class="page-sidebar">
-            <div class="sidebar-menugroup">
-                <div class="sidebar-grouptitle">个人中心</div>
-                <ul class="sidebar-menu">
-                    <li class="sidebar-menuitem"><a
-                            href="${pageContext.request.contextPath}/metting/notifications?employeeid=${employeeid}">最新通知</a>
-                    </li>
-                    <li class="sidebar-menuitem active"><a
-                            href="${pageContext.request.contextPath}/metting/bookmeeting?employeeid=${employeeid}">我的预定</a>
-                    </li>
-                    <li class="sidebar-menuitem"><a
-                            href="${pageContext.request.contextPath}/metting/mymeetings?employeeid=${employeeid}">我的会议</a>
-                    </li>
-                </ul>
-            </div>
-            <c:if test="${role==1}">
-                <div class="sidebar-menugroup">
-                    <div class="sidebar-grouptitle">人员管理</div>
-                    <ul class="sidebar-menu">
-                        <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/department">部门管理</a></li>
-                        <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/department">员工注册</a>
-                        </li>
-                        <li class="sidebar-menuitem"><a
-                                href="${pageContext.request.contextPath}/emp/approveaccount">注册审批</a></li>
-                        <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/code/searchemployees.jsp">搜索员工</a>
-                        </li>
-                    </ul>
-                </div>
-            </c:if>
-            <div class="sidebar-menugroup">
-                <div class="sidebar-grouptitle">会议预定</div>
-                <ul class="sidebar-menu">
-                    <c:if test="${role==1}">
-                    <li class="sidebar-menuitem"><a
-                            href="${pageContext.request.contextPath}/code/addmeetingroom.jsp">添加会议室</a></li>
-                    <li class="sidebar-menuitem"></c:if>
-                        <a href="${pageContext.request.contextPath}/meetinGroom/meetingrooms">查看会议室</a></li>
-                    <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/emp/bookmeeting">预定会议</a></li>
-                    <li class="sidebar-menuitem"><a
-                            href="${pageContext.request.contextPath}/code/searchmeetings.jsp">搜索会议</a></li>
-                </ul>
-            </div>
+    <div class="page-sidebar">
+        <div class="sidebar-menugroup">
+            <div class="sidebar-grouptitle">个人中心</div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menuitem"><a
+                        href="${pageContext.request.contextPath}/metting/notifications?employeeid=${employeeid}">最新通知</a>
+                </li>
+                <li class="sidebar-menuitem active"><a
+                        href="${pageContext.request.contextPath}/metting/bookmeeting?employeeid=${employeeid}">我的预定</a>
+                </li>
+                <li class="sidebar-menuitem"><a
+                        href="${pageContext.request.contextPath}/metting/mymeetings?employeeid=${employeeid}">我的会议</a>
+                </li>
+            </ul>
         </div>
+        <c:if test="${role==1}">
+            <div class="sidebar-menugroup">
+                <div class="sidebar-grouptitle">人员管理</div>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/departments">部门管理</a></li>
+                    <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/departments/department">员工注册</a>
+                    </li>
+                    <li class="sidebar-menuitem"><a
+                            href="${pageContext.request.contextPath}/emp/approveaccount">注册审批</a></li>
+                    <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/code/searchemployees.jsp">搜索员工</a>
+                    </li>
+                </ul>
+            </div>
+        </c:if>
+        <div class="sidebar-menugroup">
+            <div class="sidebar-grouptitle">会议预定</div>
+            <ul class="sidebar-menu">
+                <c:if test="${role==1}">
+                <li class="sidebar-menuitem"><a
+                        href="${pageContext.request.contextPath}/code/addmeetingroom.jsp">添加会议室</a></li>
+                <li class="sidebar-menuitem"></c:if>
+                    <a href="${pageContext.request.contextPath}/meetinGroom/meetingrooms">查看会议室</a></li>
+                <li class="sidebar-menuitem"><a href="${pageContext.request.contextPath}/emp/bookmeeting">预定会议</a></li>
+                <li class="sidebar-menuitem"><a
+                        href="${pageContext.request.contextPath}/code/searchmeetings.jsp">搜索会议</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="page-content">
         <div class="content-nav">
             人员管理 > 部门管理
