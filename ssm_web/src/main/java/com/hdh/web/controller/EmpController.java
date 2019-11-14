@@ -27,7 +27,7 @@ public class EmpController {
      * @param Password 密码
      * @return ModelAndView
      */
-    @PostMapping("empLogin")
+    @RequestMapping("empLogin")
     public String empLogin(@RequestParam("username") String username, @RequestParam("password") String Password, HttpSession session, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         Employee emps = empService.empLogin(username, Password);
@@ -48,7 +48,7 @@ public class EmpController {
             return "redirect:/metting/notifications?employeeid=" + emps.getEmployeeid();
         }
     }
-    @GetMapping("outLogin")
+    @RequestMapping("outLogin")
     public String outLogin(HttpSession session) {
         session.invalidate();
             return "login";
@@ -67,7 +67,6 @@ public class EmpController {
         empService.register(employee);
         return "redirect:/emp/approveaccount";
     }
-
     /**
      * 管理员对用户注册的审批
      *

@@ -31,7 +31,7 @@
 
     <!--扫描接口包路劲，生成包下面的所有 代理对象，并放入spring容器中-->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hdh.mapper"></property>
+        <property name="basePackage" value="com.hdh.mapper  "></property>
     </bean>
 
     <!--配置事务-->
@@ -42,18 +42,19 @@
     <!--配置事务的通知-->
     <tx:advice id="teAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
-            <tx:method name="delete*" propagation="REQUIRED" />
-            <tx:method name="find*" read-only="true" />
-            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
         </tx:attributes>
     </tx:advice>
+
 
     <!--配置切面-->
     <aop:config>
         <aop:pointcut id="pt" expression="execution(* com.hdh.service.impl.*.*(..))"></aop:pointcut>
         <aop:advisor advice-ref="teAdvice" pointcut-ref="pt"></aop:advisor>
     </aop:config>
+
 
 </beans>

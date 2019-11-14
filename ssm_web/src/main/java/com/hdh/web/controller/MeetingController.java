@@ -28,7 +28,7 @@ public class MeetingController {
      * @return ModelAndView
      */
 
-    @GetMapping("notifications")
+    @RequestMapping("notifications")
     public ModelAndView notifications(@RequestParam("employeeid") Integer employeeid) {
         ModelAndView mv = new ModelAndView();
         List<Meeting> meetings = meetingService.notifications(employeeid);

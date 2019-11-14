@@ -3,15 +3,20 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-     http://www.springframework.org/schema/beans/spring-beans.xsd
-     http://www.springframework.org/schema/mvc
-     http://www.springframework.org/schema/mvc/spring-mvc.xsd
-     http://www.springframework.org/schema/context
-     http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+           ">
     <!--开启注解扫描controller层-->
     <context:component-scan base-package="com.hdh.web"></context:component-scan>
-
+    <mvc:annotation-driven></mvc:annotation-driven>
     <!--配置视图解析器-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/code/"></property>
@@ -19,13 +24,11 @@
     </bean>
 
     <!--放行静态资源-->
-    <mvc:resources mapping="/code/**" location="/code/"></mvc:resources>
-    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+    <!--<mvc:resources mapping="/code/**" location="/code/"></mvc:resources>-->
+    <!--<mvc:resources mapping="/js/**" location="/js/"></mvc:resources>-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
-    <!--开启springmvc对注解的支持-->
-    <mvc:annotation-driven></mvc:annotation-driven>
-    
-    
+
     <!--配置拦截器-->
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->
@@ -53,6 +56,13 @@
             </value>
         </property>
     </bean>
+
+    <!--
+       支持AOP的注解支持，AOP底层使用代理技术
+       JDK动态代理，要求必须有接口
+       cglib代理，生成子类对象，proxy-target-class="true" 默认使用cglib的方式
+   -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
 
 </beans>
